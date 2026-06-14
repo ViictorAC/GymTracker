@@ -5,13 +5,18 @@ namespace App\Http\Controllers;
 use App\Helpers\GymHelper;
 use App\Models\Rutina;
 use App\Models\Ejercicio;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RutinaController extends Controller
 {
     public function index()
     {
-        $rutinas = auth()->user()->rutinas()
+        /** @var User $user */
+        $user = Auth::user();
+
+        $rutinas = $user->rutinas()
             ->with('ejercicios')
             ->paginate(10);
 
@@ -20,6 +25,9 @@ class RutinaController extends Controller
 
     public function create()
     {
+        /** @var User $user */
+        $user = Auth::user();
+
         $ejercicios = Ejercicio::with('musculos')->orderBy('nombre')->get();
 
         $ejerciciosJson = $ejercicios->map(fn($ej) => [
@@ -43,7 +51,10 @@ class RutinaController extends Controller
             'ejercicios.*.reps'   => 'required_with:ejercicios|integer|min:1',
         ]);
 
-        $rutina = auth()->user()->rutinas()->create(
+        /** @var User $user */
+        $user = Auth::user();
+
+        $rutina = $user->rutinas()->create(
             $request->only('nombre', 'descripcion', 'dia_semana')
         );
 
@@ -61,7 +72,7 @@ class RutinaController extends Controller
 
     public function show(Rutina $rutina)
     {
-        abort_if($rutina->user_id !== auth()->id(), 403);
+        abort_if($rutina->user_id !== Auth::id(), 403);
         $rutina->load('ejercicios.musculos');
 
         // Usar el helper per mostrar el dia de la setmana
@@ -72,7 +83,7 @@ class RutinaController extends Controller
 
     public function edit(Rutina $rutina)
     {
-        abort_if($rutina->user_id !== auth()->id(), 403);
+        abort_if($rutina->user_id !== Auth::id(), 403);
         $ejercicios = Ejercicio::with('musculos')->orderBy('nombre')->get();
         $rutina->load('ejercicios');
 
@@ -87,7 +98,7 @@ class RutinaController extends Controller
 
     public function update(Request $request, Rutina $rutina)
     {
-        abort_if($rutina->user_id !== auth()->id(), 403);
+        abort_if($rutina->user_id !== Auth::id(), 403);
 
         $request->validate([
             'nombre'              => 'required|string|max:150',
@@ -115,7 +126,7 @@ class RutinaController extends Controller
 
     public function destroy(Rutina $rutina)
     {
-        abort_if($rutina->user_id !== auth()->id(), 403);
+        abort_if($rutina->user_id !== Auth::id(), 403);
         $rutina->delete();
         return redirect()->route('rutinas.index')->with('success', 'Rutina eliminada.');
     }

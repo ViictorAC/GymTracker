@@ -1,100 +1,70 @@
 <x-app-layout>
     <x-slot name="header">
         <div class="d-flex align-items-center gap-2">
-            <svg class="bi bi-dumbbell" width="28" height="28" viewBox="0 0 16 16" fill="currentColor">
-                <path d="M6.5 1a.5.5 0 0 1 .5.5v3H2a.5.5 0 0 1 0-1h4V1.5a.5.5 0 0 1 .5-.5z"/>
-                <path d="M6 7a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                <path d="M2.5 7a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm10 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z"/>
-                <path d="M10 1a.5.5 0 0 1 .5.5v3H14a.5.5 0 0 1 0 1h-4V1.5a.5.5 0 0 1 .5-.5z"/>
-                <path d="M6 11a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/>
-                <path d="M2.5 11a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm10 0a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1z"/>
-                <path d="M6 15a.5.5 0 0 1-.5-.5v-3H2a.5.5 0 0 1 0-1h4v3a.5.5 0 0 1-.5.5z"/>
-                <path d="M10 15a.5.5 0 0 1-.5-.5v-3H6a.5.5 0 0 1 0-1h4v3a.5.5 0 0 1-.5.5z"/>
+            <svg class="bi bi-journal-plus" width="28" height="28" viewBox="0 0 16 16" fill="currentColor">
+                <path fill-rule="evenodd" d="M8 4a.5.5 0 0 1 .5.5v2h2a.5.5 0 0 1 0 1h-2v2a.5.5 0 0 1-1 0v-2h-2a.5.5 0 0 1 0-1h2v-2A.5.5 0 0 1 8 4z"/>
+                <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h4.5a.5.5 0 0 1 .354.146l5 5A.5.5 0 0 1 14 4.5zM9.5 3a.5.5 0 0 1-.5-.5V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V5h-3.5a.5.5 0 0 1-.5-.5V3z"/>
             </svg>
-            <h2 class="fw-bold mb-0">Nuevo Entrenamiento</h2>
+            <h2 class="fw-bold mb-0">Nova rutina</h2>
         </div>
     </x-slot>
 
     <div class="row">
         <div class="col-lg-8">
-            <form action="{{ route('entrenos.store') }}" method="POST" id="entrenoForm">
+            <form action="{{ route('rutinas.store') }}" method="POST" id="rutinaForm">
                 @csrf
 
                 <div class="card border-0 shadow-sm mb-4">
                     <div class="card-header bg-light border-bottom-0 py-3">
-                        <h5 class="card-title mb-0">Información del Entrenamiento</h5>
+                        <h5 class="card-title mb-0">Informació general</h5>
                     </div>
                     <div class="card-body">
                         <div class="mb-3">
-                            <label class="form-label fw-medium">
-                                <svg class="bi bi-calendar-event" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
-                                    <path d="M11 6.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/>
-                                    <path d="M-2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H4a1 1 0 0 0-2 0H2a2 2 0 0 0-2 2zm13 2v5H1V2a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1z"/>
-                                </svg>
-                                Fecha
-                            </label>
-                            <input type="date" name="fecha" value="{{ date('Y-m-d') }}" class="form-control form-control-lg" required>
+                            <label class="form-label fw-medium">Nom</label>
+                            <input type="text" name="nombre" class="form-control form-control-lg @error('nombre') is-invalid @enderror" value="{{ old('nombre') }}" required>
+                            @error('nombre')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label fw-medium">
-                                <svg class="bi bi-list-check" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
-                                    <path fill-rule="evenodd" d="M5.338 1.59a.75.75 0 0 1 .75.75v4.5a.75.75 0 0 1-1.5 0v-4.5a.75.75 0 0 1 .75-.75zM9.5 1.5a.5.5 0 0 1 .5.5v4.5a.5.5 0 0 1-1 0v-4.5a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v4.5a.5.5 0 0 1-1 0v-4.5a.5.5 0 0 1 .5-.5zM4.5 7a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0v-1.5a.5.5 0 0 1 .5-.5zM9 7a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0v-1.5a.5.5 0 0 1 .5-.5zm2 0a.5.5 0 0 1 .5.5v1.5a.5.5 0 0 1-1 0v-1.5a.5.5 0 0 1 .5-.5z"/>
-                                </svg>
-                                Rutina (opcional)
-                            </label>
-                            <select id="rutina-select" name="rutina_id" class="form-select form-select-lg">
-                                <option value="">Entrenamiento libre</option>
-                                @foreach($rutinas as $rutina)
-                                    <option value="{{ $rutina->id }}" {{ old('rutina_id') == $rutina->id ? 'selected' : '' }}>{{ $rutina->nombre }}</option>
-                                @endforeach
-                            </select>
+                            <label class="form-label fw-medium">Descripció</label>
+                            <textarea name="descripcion" class="form-control" rows="4" placeholder="Descriu l'objectiu d'esta rutina">{{ old('descripcion') }}</textarea>
                         </div>
 
                         <div class="mb-0">
-                            <label class="form-label fw-medium">
-                                <svg class="bi bi-chat-left-text" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
-                                    <path d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.5a2 2 0 0 0-2 2v2.5a.5.5 0 0 1-.8.4l-1.9-2.533a1 1 0 0 0-.6-.3H1a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12z"/>
-                                </svg>
-                                Comentario
-                            </label>
-                            <textarea name="comentario" class="form-control" rows="3" placeholder="Añadir observaciones...">{{ old('comentario') }}</textarea>
+                            <label class="form-label fw-medium">Dia de la setmana (opcional)</label>
+                            <select name="dia_semana" class="form-select form-select-lg">
+                                <option value="">-- Cap --</option>
+                                @foreach(['Dilluns','Dimarts','Dimecres','Dijous','Divendres','Dissabte','Diumenge'] as $i => $dia)
+                                    <option value="{{ $i + 1 }}" {{ old('dia_semana') == $i + 1 ? 'selected' : '' }}>{{ $dia }}</option>
+                                @endforeach
+                            </select>
                         </div>
                     </div>
                 </div>
 
                 <div class="card border-0 shadow-sm">
                     <div class="card-header bg-light border-bottom-0 py-3 d-flex justify-content-between align-items-center">
-                        <h5 class="card-title mb-0">Series</h5>
-                        <span class="badge bg-info" id="series-count">0</span>
+                        <h5 class="card-title mb-0">Exercicis</h5>
+                        <span class="badge bg-info" id="exercises-count">0</span>
                     </div>
                     <div class="card-body">
-                        <div id="sets-container"></div>
-                        <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#setsModal">
+                        <div id="ejercicios-container"></div>
+
+                        <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#exercisesModal">
                             <svg class="bi bi-plus-circle" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
                                 <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
                             </svg>
-                            Agregar Ejercicio
+                            Afegir exercici
                         </button>
                     </div>
                 </div>
 
                 <div class="mt-4 d-flex gap-2">
-                    <button type="submit" class="btn btn-primary btn-lg flex-grow-1">
-                        <svg class="bi bi-check-circle" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="m10.97 4.97-.02.02-3.6 3.85a.75.75 0 0 1-1.08.02l-2.3-2.38a.75.75 0 0 1 1.08-1.04l1.77 1.83 3.12-3.35a.75.75 0 1 1 1.08 1.04z"/>
-                        </svg>
-                        Guardar Entrenamiento
-                    </button>
-                    <a href="{{ route('entrenos.index') }}" class="btn btn-outline-secondary btn-lg">
-                        <svg class="bi bi-x-circle" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
-                            <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708l2.647-2.646-2.647-2.646a.5.5 0 0 1 0-.708z"/>
-                        </svg>
-                        Cancelar
-                    </a>
+                    <button type="submit" class="btn btn-primary btn-lg flex-grow-1">Guardar rutina</button>
+                    <a href="{{ route('rutinas.index') }}" class="btn btn-outline-secondary btn-lg">Cancel·lar</a>
                 </div>
             </form>
         </div>
@@ -102,30 +72,23 @@
         <div class="col-lg-4">
             <div class="card border-0 shadow-sm sticky-top" style="top: 20px;">
                 <div class="card-header bg-light border-bottom-0 py-3">
-                    <h5 class="card-title mb-0">
-                        <svg class="bi bi-info-circle" width="18" height="18" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -2px; margin-right: 5px;">
-                            <path d="m8.93.456-6.933 11.85A.5.5 0 0 0 1.5 13h13a.5.5 0 0 0 .433-.744L9.07.456H8.93Z"/>
-                        </svg>
-                        Ayuda
-                    </h5>
+                    <h5 class="card-title mb-0">Ajuda</h5>
                 </div>
                 <div class="card-body small">
-                    <p class="mb-3"><strong>Cómo agregar series:</strong></p>
+                    <p class="mb-3"><strong>Com crear la rutina:</strong></p>
                     <ol class="ps-3 mb-3">
-                        <li>Haz clic en el botón "Agregar Ejercicio"</li>
-                        <li>Selecciona el grupo muscular</li>
-                        <li>Elige el ejercicio</li>
-                        <li>Completa los datos (serie, peso, reps)</li>
-                        <li>Haz clic en "Agregar"</li>
+                        <li>Escriu el nom de la rutina</li>
+                        <li>Afig una descripció si vols</li>
+                        <li>Selecciona els exercicis i les seues sèries/reps</li>
+                        <li>Guarda la rutina</li>
                     </ol>
-                    <p class="mb-0 text-muted"><small>Las series se muestran en la columna principal para eliminarlas fácilmente.</small></p>
+                    <p class="mb-0 text-muted"><small>Els exercicis s'afigen com a part de la rutina, no com un entrenament.</small></p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Modal para añadir series -->
-    <div class="modal fade" id="setsModal" tabindex="-1">
+    <div class="modal fade" id="exercisesModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content border-0">
                 <div class="modal-header border-bottom py-3">
@@ -141,76 +104,67 @@
                     </div>
                     <div class="mb-3">
                         <label class="form-label fw-medium">Ejercicio</label>
-                        <select id="selector-set" class="form-select">
+                        <select id="selector-ejercicio" class="form-select">
                             <option value="">-- Selecciona ejercicio --</option>
                         </select>
                     </div>
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Serie nº</label>
-                                <input type="number" id="setNumero" placeholder="1" min="1" class="form-control" required>
+                                <label class="form-label fw-medium">Series</label>
+                                <input type="number" id="exerciseSets" placeholder="3" min="1" class="form-control" required>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label class="form-label fw-medium">Peso (kg)</label>
-                                <input type="number" id="setPeso" placeholder="0" step="0.5" min="0" class="form-control">
+                                <label class="form-label fw-medium">Reps</label>
+                                <input type="number" id="exerciseReps" placeholder="10" min="1" class="form-control" required>
                             </div>
                         </div>
-                    </div>
-                    <div class="mb-3">
-                        <label class="form-label fw-medium">Reps</label>
-                        <input type="number" id="setReps" placeholder="10" min="1" class="form-control" required>
                     </div>
                 </div>
                 <div class="modal-footer border-top-0">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" id="addSetBtn">Agregar</button>
+                    <button type="button" class="btn btn-primary" id="addExerciseBtn">Agregar</button>
                 </div>
             </div>
         </div>
     </div>
 
-    <script>
-        const ejercicios = @json($ejerciciosJson);
-        const rutinas = @json($rutinasJson);
+    <textarea id="ejercicios-data" class="d-none" aria-hidden="true">{{ json_encode($ejerciciosJson, JSON_UNESCAPED_UNICODE) }}</textarea>
 
-        const selectorRutina = document.getElementById('rutina-select');
-        const selectorSet = document.getElementById('selector-set');
+    <script>
+        const ejercicios = JSON.parse(document.getElementById('ejercicios-data').value);
         const muscleGroupSelect = document.getElementById('muscleGroupSelect');
-        const setNumeroInput = document.getElementById('setNumero');
-        const setPesoInput = document.getElementById('setPeso');
-        const setRepsInput = document.getElementById('setReps');
-        const addSetBtn = document.getElementById('addSetBtn');
-        const setsContainer = document.getElementById('sets-container');
-        const seriesCount = document.getElementById('series-count');
+        const selectorEjercicio = document.getElementById('selector-ejercicio');
+        const exerciseSetsInput = document.getElementById('exerciseSets');
+        const exerciseRepsInput = document.getElementById('exerciseReps');
+        const addExerciseBtn = document.getElementById('addExerciseBtn');
+        const ejerciciosContainer = document.getElementById('ejercicios-container');
+        const exercisesCount = document.getElementById('exercises-count');
         let count = 0;
 
-        // Agrupar ejercicios por el primer múscul (múscul principal)
         function groupByMusculo(ejerciciosList) {
             const grupos = {};
             ejerciciosList.forEach(ej => {
                 const muscPrincipal = (ej.musculos && ej.musculos.length > 0)
-                    ? ej.musculos[0].nombre
+                    ? ej.musculos.map(m => m.nombre).join(', ')
                     : 'Sense grup';
+
                 if (!grupos[muscPrincipal]) {
                     grupos[muscPrincipal] = [];
                 }
+
                 grupos[muscPrincipal].push(ej);
             });
             return grupos;
         }
 
-        // Llenar el selector de grupos musculares
         function fillMuscleGroupSelect() {
-            const rutina = rutinas.find(r => String(r.id) === String(selectorRutina.value));
-            const rutinaEjercicios = rutina ? rutina.ejercicios : [];
-            
-            const allExercicios = selectorRutina.value ? rutinaEjercicios : ejercicios;
-            const grupos = groupByMusculo(allExercicios);
-            
-            muscleGroupSelect.innerHTML = '<option value="">-- Selecciona grup muscular --</option>';
+            const grupos = groupByMusculo(ejercicios);
+
+            muscleGroupSelect.innerHTML = '<option value="">-- Selecciona grupo muscular --</option>';
+                muscleGroupSelect.innerHTML = '<option value="">-- Selecciona grup muscular --</option>';
             Object.keys(grupos).sort().forEach(musculo => {
                 const option = document.createElement('option');
                 option.value = musculo;
@@ -219,30 +173,23 @@
             });
         }
 
-        // Llenar el selector de ejercicios según grupo muscular
         function fillExerciseSelect(muscleGroup) {
-            const rutina = rutinas.find(r => String(r.id) === String(selectorRutina.value));
-            const rutinaEjercicios = rutina ? rutina.ejercicios : [];
-            
-            const allExercicios = selectorRutina.value ? rutinaEjercicios : ejercicios;
-            const grupos = groupByMusculo(allExercicios);
-            
-            selectorSet.innerHTML = '<option value="">-- Selecciona exercici --</option>';
-            
+            const grupos = groupByMusculo(ejercicios);
+            selectorEjercicio.innerHTML = '<option value="">-- Selecciona ejercicio --</option>';
+                selectorEjercicio.innerHTML = '<option value="">-- Selecciona exercici --</option>';
+
             if (muscleGroup && grupos[muscleGroup]) {
                 grupos[muscleGroup].forEach(ej => {
                     const option = document.createElement('option');
                     option.value = ej.id;
                     option.dataset.nombre = ej.nombre;
-                    const secMuscles = ej.musculos.slice(1).map(m => m.nombre).join(', ');
-                    option.textContent = secMuscles ? `${ej.nombre} (+ ${secMuscles})` : ej.nombre;
-                    selectorSet.appendChild(option);
+                    option.textContent = ej.nombre;
+                    selectorEjercicio.appendChild(option);
                 });
             }
         }
 
-        // Crear tarjeta de serie
-        function createSetCard(id, nombre, setNumero, peso, reps) {
+        function createExerciseCard(id, nombre, sets, reps) {
             const div = document.createElement('div');
             div.className = 'card mb-2 border-0 bg-light';
             div.innerHTML = `
@@ -251,25 +198,21 @@
                         <div class="flex-grow-1">
                             <h6 class="card-title mb-2">${nombre}</h6>
                             <div class="row g-2">
-                                <div class="col-4">
-                                    <small class="text-muted d-block">Serie</small>
-                                    <strong>${setNumero}</strong>
+                                <div class="col-6">
+                                    <small class="text-muted d-block">Series</small>
+                                        <small class="text-muted d-block">Sèries</small>
+                                    <strong>${sets}</strong>
                                 </div>
-                                <div class="col-4">
-                                    <small class="text-muted d-block">Peso</small>
-                                    <strong>${peso || '-'} kg</strong>
-                                </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <small class="text-muted d-block">Reps</small>
                                     <strong>${reps}</strong>
                                 </div>
                             </div>
                         </div>
-                        <input type="hidden" name="sets[${count}][ejercicio_id]" value="${id}">
-                        <input type="hidden" name="sets[${count}][set_numero]" value="${setNumero}">
-                        <input type="hidden" name="sets[${count}][peso]" value="${peso || 0}">
-                        <input type="hidden" name="sets[${count}][reps]" value="${reps}">
-                        <button type="button" class="btn btn-sm btn-outline-danger ms-2" onclick="this.parentElement.parentElement.remove(); updateSeriesCount();">
+                        <input type="hidden" name="ejercicios[${count}][id]" value="${id}">
+                        <input type="hidden" name="ejercicios[${count}][sets]" value="${sets}">
+                        <input type="hidden" name="ejercicios[${count}][reps]" value="${reps}">
+                        <button type="button" class="btn btn-sm btn-outline-danger ms-2" onclick="this.parentElement.parentElement.remove(); updateExercisesCount();">
                             <svg class="bi bi-trash" width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
                                 <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
                                 <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 1a.5.5 0 0 0-.5.5v1h12v-1a.5.5 0 0 0-.5-.5H2.5z"/>
@@ -278,60 +221,43 @@
                     </div>
                 </div>
             `;
-            return div;
+            ejerciciosContainer.appendChild(div);
+            count++;
+            updateExercisesCount();
         }
 
-        // Actualizar contador de series
-        function updateSeriesCount() {
-            const cards = setsContainer.querySelectorAll('.card').length;
-            seriesCount.textContent = cards;
+        function updateExercisesCount() {
+            const cards = ejerciciosContainer.querySelectorAll('.card');
+            exercisesCount.textContent = cards.length;
         }
 
-        // Eventos
-        selectorRutina.addEventListener('change', function () {
-            fillMuscleGroupSelect();
-            muscleGroupSelect.value = '';
-            selectorSet.innerHTML = '<option value="">-- Selecciona ejercicio --</option>';
-            setNumeroInput.value = '';
-            setPesoInput.value = '';
-            setRepsInput.value = '';
-        });
+        addExerciseBtn.addEventListener('click', () => {
+            const option = selectorEjercicio.options[selectorEjercicio.selectedIndex];
+            const id = selectorEjercicio.value;
+            const nombre = option ? option.dataset.nombre : '';
+            const sets = exerciseSetsInput.value;
+            const reps = exerciseRepsInput.value;
 
-        muscleGroupSelect.addEventListener('change', function () {
-            fillExerciseSelect(this.value);
-        });
-
-        addSetBtn.addEventListener('click', function () {
-            const id = selectorSet.value;
-            const nombre = selectorSet.options[selectorSet.selectedIndex].dataset.nombre;
-            const setNumero = setNumeroInput.value;
-            const peso = setPesoInput.value;
-            const reps = setRepsInput.value;
-
-            if (!id || !setNumero || !reps) {
-                alert('Por favor, completa los campos obligatorios');
+            if (!id || !sets || !reps) {
                 return;
             }
 
-            setsContainer.appendChild(createSetCard(id, nombre, setNumero, peso, reps));
-            count++;
-            updateSeriesCount();
+            createExerciseCard(id, nombre, sets, reps);
 
-            // Limpiar formulario
-            setNumeroInput.value = '';
-            setPesoInput.value = '';
-            setRepsInput.value = '';
-            selectorSet.value = '';
-            muscleGroupSelect.value = '';
+            selectorEjercicio.value = '';
+            exerciseSetsInput.value = '';
+            exerciseRepsInput.value = '';
 
-            // Cerrar modal
-            const modal = bootstrap.Modal.getInstance(document.getElementById('setsModal'));
-            modal.hide();
+            const modal = bootstrap.Modal.getInstance(document.getElementById('exercisesModal'));
+            if (modal) {
+                modal.hide();
+            }
         });
 
-        // Inicializar
-        document.addEventListener('DOMContentLoaded', function () {
-            fillMuscleGroupSelect();
+        muscleGroupSelect.addEventListener('change', () => {
+            fillExerciseSelect(muscleGroupSelect.value);
         });
+
+        fillMuscleGroupSelect();
     </script>
 </x-app-layout>
