@@ -200,7 +200,6 @@
                             <div class="row g-2">
                                 <div class="col-6">
                                     <small class="text-muted d-block">Series</small>
-                                        <small class="text-muted d-block">Sèries</small>
                                     <strong>${sets}</strong>
                                 </div>
                                 <div class="col-6">
