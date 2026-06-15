@@ -16,7 +16,7 @@ class EntrenoController extends Controller
         $entrenos = auth()->user()->entrenos()
             ->with('rutina')
             ->orderBy('fecha', 'desc')
-            ->paginate(10);
+            ->paginate(5);
 
         return view('entrenos.index', compact('entrenos'));
     }

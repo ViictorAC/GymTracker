@@ -18,7 +18,7 @@ class RutinaController extends Controller
 
         $rutinas = $user->rutinas()
             ->with('ejercicios')
-            ->paginate(10);
+            ->paginate(5);
 
         return view('rutinas.index', compact('rutinas'));
     }

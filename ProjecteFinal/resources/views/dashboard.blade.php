@@ -113,7 +113,7 @@
                     </a>
                 </div>
                 <div class="col-md-6">
-                    <a href="{{ route('progres.index') }}" class="btn btn-info w-100 py-3" style="text-decoration: none;">
+                    <a href="{{ route('ejercicios.index') }}" class="btn btn-info w-100 py-3" style="text-decoration: none;">
                         <svg class="bi bi-graph-up" width="20" height="20" viewBox="0 0 16 16" fill="currentColor" style="vertical-align: -3px; margin-right: 8px;">
                             <path fill-rule="evenodd" d="M0 0h1v15h15v1H0V0Zm14.817 3.113a.5.5 0 0 1 .07.704l-4.5 5.5a.5.5 0 0 1-.74.037L7.06 6.767l-3.656 5.027a.5.5 0 0 1-.808-.588l4-5.5a.5.5 0 0 1 .758-.06l2.609 2.61 4.15-5.073a.5.5 0 0 1 .704-.07Z"/>
                         </svg>
